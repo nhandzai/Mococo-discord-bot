@@ -13,12 +13,23 @@ client.on('ready', (c) => {
     console.log(`${c.user.tag} is online`);
 })
 
-client.on('messageCreate', (msg) => {
-    if (msg.author.bot) return;
-
-    if (msg.content === "bau")
-        msg.reply("bau bau");
-
+client.on('interactionCreate',(interaction)=>{
+    if(!interaction.isChatInputCommand())return;
+    
+    if(interaction.commandName === 'ping'){
+        interaction.reply('pong');
+    }
+    if(interaction.commandName === 'baubau'){
+        interaction.reply('bau bau bau bau bau bau bau bau');
+    }
 })
+
+// client.on('messageCreate', (msg) => {
+//     if (msg.author.bot) return;
+
+//     if (msg.content === "bau")
+//         msg.reply("bau bau");
+
+// })
 
 client.login(process.env.TOKEN);
