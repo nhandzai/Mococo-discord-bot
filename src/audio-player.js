@@ -9,11 +9,10 @@ const { joinVoiceChannel,
 
 /**
  * Plays an audio source in a voice connection.
- * @param {VoiceConnection} connection - The voice connection.
- * @param {AudioPlayer} player - The audio player.
+ * @param {VoiceConnection} Connection - The voice connection.
+ * @param {AudioPlayer} Player - The audio player.
  * @param {string} source - Source mp3
  */
-
 function playSong(Connection,Player,source) {
     Player.play(source);
     Connection.subscribe(Player);

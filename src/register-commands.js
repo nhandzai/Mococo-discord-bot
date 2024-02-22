@@ -1,4 +1,6 @@
 require('dotenv').config();
+const guildId = process.env.GUILD_ID;
+
 const {REST,Routes,ApplicationCommandOptionType}=require('discord.js');
 
 const commands = [
@@ -25,7 +27,11 @@ const commands = [
     {
         name: 'fjoin',
         description: 'Join a user voice channel',
-    }   
+    },
+    {
+        name: 'help',
+        description: 'send list of commands'
+    }
 ];
 
 const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
@@ -34,7 +40,7 @@ const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
     try {
         console.log('Registering slash commands...');
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID,process.env.GUILD_ID),
+            Routes.applicationGuildCommands(process.env.CLIENT_ID,guildId),
             {body:commands}
         )
         console.log('Registering slash commands successfully');
