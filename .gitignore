@@ -1,6 +1,8 @@
 .env
 audio/
 picture/
+build/
+
 # Logs
 logs
 *.log
