@@ -1,9 +1,9 @@
 const { Client,
-     AttachmentBuilder,
-     ActionRowBuilder,
-     IntentsBitField,
-     EmbedBuilder,
-      Colors } = require('discord.js');
+    AttachmentBuilder,
+    ActionRowBuilder,
+    IntentsBitField,
+    EmbedBuilder,
+    Colors } = require('discord.js');
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -23,6 +23,8 @@ const { joinVoiceChannel,
 require('dotenv').config();
 const { path, join } = require('node:path');
 const { playSong } = require('./audio-player');
+const { execute } = require('./button');
+const { makeEmbed } = require('./embed');
 
 function interactionHandle(interaction, player) {
     if (!interaction.isChatInputCommand()) return;
@@ -57,22 +59,12 @@ function interactionHandle(interaction, player) {
         });
         interaction.reply('Bau bau')
     }
-    if(interaction.commandName === 'help'){ 
-        const file = new AttachmentBuilder('./picture/icon.png');
-        const embed = new EmbedBuilder()
-        .setTitle("HELP COMMANDS")
-        .setDescription('BAU BAU BAU BAU BAU')
-        .setColor('Random')
-        //.setImage('attachment://icon.png')
-        .setThumbnail('attachment://icon.png')
-        .addFields({
-            name: 'Message command',
-            value: '!join\n!dis\n!baubau\n!kys\n!pen\n!vang m to',
-            inline: true,
-        })
-        .setFooter({ text: 'Make by AnNhiene', iconURL: 'attachment://icon.png' });
-        ;
-        interaction.reply({embeds: [embed],files: [file]});
+    if (interaction.commandName === 'help') {
+        const {embed, file} = makeEmbed(interaction.commandName);
+        interaction.reply({ embeds: [embed], files: [file] });
+    }
+    if (interaction.commandName === 'ban') {
+        execute(interaction);
     }
 }
 module.exports = {

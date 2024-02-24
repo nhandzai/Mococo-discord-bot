@@ -1,5 +1,5 @@
 require('dotenv').config();
-const guildId = process.env.GUILD_ID;
+const guildId = process.env.GUILD_ID1;
 
 const {REST,Routes,ApplicationCommandOptionType}=require('discord.js');
 
@@ -31,6 +31,18 @@ const commands = [
     {
         name: 'help',
         description: 'send list of commands'
+    },
+    {
+        name: 'ban',
+        description: 'ban cmmn',
+        options: [
+            {
+                name: 'user',
+                description: 'ban user',
+                type: ApplicationCommandOptionType.User,
+                require: true,
+            }
+        ]
     }
 ];
 

@@ -26,7 +26,6 @@ function messageHandle(msg, player) {
                 msg.reply('You are not in a voice channel!')
                 return;
             }
-
             const connection = joinVoiceChannel({
                 channelId: msg.member.voice.channel.id,
                 guildId: msg.guildId,
@@ -40,7 +39,6 @@ function messageHandle(msg, player) {
                 msg.reply('You are not in a voice channel!')
                 return;
             }
-
             const connection = joinVoiceChannel({
                 channelId: msg.member.voice.channel.id,
                 guildId: msg.guildId,
@@ -54,7 +52,6 @@ function messageHandle(msg, player) {
                 msg.reply('You are not in a voice channel!')
                 return;
             }
-
             const connection = joinVoiceChannel({
                 channelId: msg.member.voice.channel.id,
                 guildId: msg.guildId,
@@ -68,7 +65,6 @@ function messageHandle(msg, player) {
                 msg.reply('You are not in a voice channel!')
                 return;
             }
-
             const connection = joinVoiceChannel({
                 channelId: msg.member.voice.channel.id,
                 guildId: msg.guildId,
@@ -82,7 +78,6 @@ function messageHandle(msg, player) {
                 msg.reply('You are not in a voice channel!')
                 return;
             }
-
             const connection = joinVoiceChannel({
                 channelId: msg.member.voice.channel.id,
                 guildId: msg.guildId,
@@ -112,10 +107,7 @@ function messageHandle(msg, player) {
                 msg.reply('I must in a voice channel');
 
             }
-
-
         }
-
     }
 }
 module.exports = {
