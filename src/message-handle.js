@@ -8,18 +8,26 @@ const { joinVoiceChannel,
 require('dotenv').config();
 const { path, join } = require('node:path');
 const { playSong } = require('./audio-player');
-
-
+const { Colors } = require('discord.js')
+const { chatBot } = require('./chatbot.js')
 const prefix = '!';
 
-function messageHandle(msg, player) {
+const msgCommand = [
+    'join',
+    'pen',
+    'kys',
+    'baubau',
+    'vang m to',
+    'bruh',
+    'dis',
+]
+
+
+async function messageHandle(msg, player) {
     if (msg.content.startsWith(prefix)) {
         const msgCommand = msg.content.slice(prefix.length);
 
         if (msg.author.bot) return;
-
-        if (msgCommand === "bau")
-            msg.reply("Bau bau");
 
         if (msgCommand === "join") {
             if (!msg.member.voice.channel) {
@@ -70,8 +78,11 @@ function messageHandle(msg, player) {
                 guildId: msg.guildId,
                 adapterCreator: msg.guild.voiceAdapterCreator,
             })
-            let intro = createAudioResource(join(__dirname, '..', 'audio', process.env.BAUBAU));
+            let intro = createAudioResource(join(__dirname, '..', 'audio', process.env.BAUBAUBAU));
             playSong(connection, player, intro);
+
+
+
         }
         if (msgCommand === "vang m to") {
             if (!msg.member.voice.channel) {
@@ -84,6 +95,19 @@ function messageHandle(msg, player) {
                 adapterCreator: msg.guild.voiceAdapterCreator,
             })
             let intro = createAudioResource(join(__dirname, '..', 'audio', process.env.VANGMTO));
+            playSong(connection, player, intro);
+        }
+        if (msgCommand === "bruh") {
+            if (!msg.member.voice.channel) {
+                msg.reply('You are not in a voice channel!')
+                return;
+            }
+            const connection = joinVoiceChannel({
+                channelId: msg.member.voice.channel.id,
+                guildId: msg.guildId,
+                adapterCreator: msg.guild.voiceAdapterCreator,
+            })
+            let intro = createAudioResource(join(__dirname, '..', 'audio', process.env.BRUH));
             playSong(connection, player, intro);
         }
         if (msgCommand === "dis") {
@@ -108,8 +132,14 @@ function messageHandle(msg, player) {
 
             }
         }
+    } else if (msg.content.startsWith('@')) {
+        const msgcontent = msg.content.slice('@');
+        let prompt = ''
+        prompt = await chatBot(msgcontent)
+        await msg.reply(prompt);
     }
 }
 module.exports = {
-    messageHandle: messageHandle
+    messageHandle: messageHandle,
+    msgCommand: msgCommand
 }

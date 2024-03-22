@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, IntentsBitField,EmbedBuilder } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder } = require('discord.js');
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -36,3 +36,4 @@ client.on('messageCreate', (msg) => {
 });
 
 client.login(process.env.TOKEN);
+

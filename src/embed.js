@@ -5,6 +5,13 @@ const { Client,
     EmbedBuilder,
     Colors } = require('discord.js');
 
+const { msgCommand } = require('./message-handle');
+let prefix_Command = '';
+for (let index = 0; index < msgCommand.length; index++) {
+    prefix_Command += msgCommand[index] + '\n';
+}
+
+
 function makeEmbed(commandName) {
     if (commandName === 'help') {
         const file = new AttachmentBuilder(`./picture/${process.env.ICON}`);
@@ -15,7 +22,7 @@ function makeEmbed(commandName) {
             .setThumbnail(`attachment://${process.env.ICON}`)
             .addFields({
                 name: 'Message command',
-                value: '!join\n!dis\n!baubau\n!kys\n!pen\n!vang m to',
+                value: prefix_Command,
                 inline: true,
             })
             .setFooter({ text: 'Make by AnNhiene', iconURL: `attachment://${process.env.ICON}` });

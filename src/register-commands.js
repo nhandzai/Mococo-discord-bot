@@ -1,8 +1,8 @@
 require('dotenv').config();
 const guildId = process.env.GUILD_ID1;
 
-const {REST,Routes,ApplicationCommandOptionType}=require('discord.js');
-
+const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
+const rpsCommand = require('./rps.js');
 const commands = [
     {
         name: 'ping',
@@ -33,30 +33,42 @@ const commands = [
         description: 'send list of commands'
     },
     {
-        name: 'ban',
-        description: 'ban cmmn',
+        name: 'talk',
+        description: 'talk to mococo',
+        options: [
+            {
+                name: 'prompt',
+                description: 'talk to me anything',
+                type: ApplicationCommandOptionType.String,
+                require: true,
+            }
+        ]
+    },
+    {
+        name: 'rps',
+        description: 'Play rock paper scissors with another user.',
         options: [
             {
                 name: 'user',
-                description: 'ban user',
+                description: 'Who you want to play with.',
                 type: ApplicationCommandOptionType.User,
-                require: true,
+                required: true,
             }
         ]
     }
 ];
 
-const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
-(async()=>{
+(async () => {
     try {
         console.log('Registering slash commands...');
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID,guildId),
-            {body:commands}
+            Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId),
+            { body: commands }
         )
         console.log('Registering slash commands successfully');
     } catch (error) {
-        console.log(`There was an error: ${error}`);        
+        console.log(`There was an error: ${error}`);
     }
 })();
